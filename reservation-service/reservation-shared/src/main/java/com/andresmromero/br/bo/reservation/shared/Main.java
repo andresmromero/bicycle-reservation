@@ -1,4 +1,4 @@
-package com.andresmromero.br.bo;
+package com.andresmromero.br.bo.reservation.shared;
 
 public class Main {
     public static void main(String[] args) {

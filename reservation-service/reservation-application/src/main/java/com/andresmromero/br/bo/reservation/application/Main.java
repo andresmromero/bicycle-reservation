@@ -1,4 +1,4 @@
-package com.andresmromero.br.bo;
+package com.andresmromero.br.bo.reservation.application;
 
 public class Main {
     public static void main(String[] args) {
