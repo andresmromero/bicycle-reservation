@@ -13,6 +13,8 @@
         <module>shared_kernel</module>
         <module>pay-service</module>
         <module>reservation-service</module>
+        <module>station-service</module>
+        <module>station-service/station-shared</module>
     </modules>
 
     <parent>
@@ -109,6 +111,32 @@
             <dependency>
                 <groupId>com.andresmromero.br.bo</groupId>
                 <artifactId>reservation-shared</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>station-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>station-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>station-persistence</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>station-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>station-shared</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
