@@ -12,6 +12,7 @@
         <module>customer-service</module>
         <module>shared_kernel</module>
         <module>pay-service</module>
+        <module>reservation-service</module>
     </modules>
 
     <parent>
@@ -82,6 +83,32 @@
             <dependency>
                 <groupId>com.andresmromero.br.bo</groupId>
                 <artifactId>pay-shared</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>reservation-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>reservation-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>reservation-persistence</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>reservation-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>reservation-shared</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
