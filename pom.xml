@@ -11,6 +11,7 @@
     <modules>
         <module>customer-service</module>
         <module>shared_kernel</module>
+        <module>pay-service</module>
     </modules>
 
     <parent>
@@ -55,6 +56,32 @@
             <dependency>
                 <groupId>com.andresmromero.br.bo</groupId>
                 <artifactId>customer-shared</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>pay-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>pay-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>pay-persistence</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>pay-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>pay-shared</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
