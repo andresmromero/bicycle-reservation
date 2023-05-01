@@ -3,8 +3,9 @@ package com.andresmromero.br.bo.customer.packager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
+@EnableDiscoveryClient
 @EnableJpaRepositories(basePackages = "com.andresmromero.br.bo.customer.*")
 @EntityScan(basePackages = "com.andresmromero.br.bo.customer.*")
 @SpringBootApplication(scanBasePackages = "com.andresmromero.br.bo.customer.*")
