@@ -14,7 +14,6 @@
         <module>pay-service</module>
         <module>reservation-service</module>
         <module>station-service</module>
-        <module>station-service/station-shared</module>
     </modules>
 
     <parent>
@@ -55,6 +54,11 @@
             </dependency>
             <dependency>
                 <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>customer-communication</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
                 <artifactId>customer-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -77,6 +81,11 @@
             <dependency>
                 <groupId>com.andresmromero.br.bo</groupId>
                 <artifactId>pay-persistence</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>pay-communication</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -107,6 +116,11 @@
             </dependency>
             <dependency>
                 <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>reservation-communication</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
                 <artifactId>reservation-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -129,6 +143,11 @@
             <dependency>
                 <groupId>com.andresmromero.br.bo</groupId>
                 <artifactId>station-persistence</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.andresmromero.br.bo</groupId>
+                <artifactId>station-communication</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -186,6 +205,10 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
     </dependencies>

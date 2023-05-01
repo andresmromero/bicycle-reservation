@@ -29,6 +29,10 @@
         </dependency>
         <dependency>
             <groupId>com.andresmromero.br.bo</groupId>
+            <artifactId>customer-communication</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.andresmromero.br.bo</groupId>
             <artifactId>customer-api</artifactId>
         </dependency>
         <dependency>

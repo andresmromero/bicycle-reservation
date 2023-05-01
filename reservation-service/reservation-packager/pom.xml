@@ -29,6 +29,10 @@
         </dependency>
         <dependency>
             <groupId>com.andresmromero.br.bo</groupId>
+            <artifactId>reservation-communication</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.andresmromero.br.bo</groupId>
             <artifactId>reservation-api</artifactId>
         </dependency>
         <dependency>

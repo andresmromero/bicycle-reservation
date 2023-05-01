@@ -1,4 +1,4 @@
-package com.andresmromero.br.bo.customer.domainx;
+package com.andresmromero.br.bo.reservation.infrastructure.comm;
 
 public class Main {
     public static void main(String[] args) {

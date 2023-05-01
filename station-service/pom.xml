@@ -16,6 +16,7 @@
         <module>station-domain</module>
         <module>station-infrastructure</module>
         <module>station-packager</module>
+        <module>station-shared</module>
     </modules>
 
     <properties>
