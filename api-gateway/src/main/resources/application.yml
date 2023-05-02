@@ -13,24 +13,24 @@ spring:
         - id: customer-service
           uri: lb://customer-service
           predicates:
-            - Path=/api/customers/**
+            - Path=/api/customer/**
           filters:
             - StripPrefix=2
         - id: pay-service
           uri: lb://pay-service
           predicates:
-            - Path=/api/pays/**
+            - Path=/api/pay/**
           filters:
             - StripPrefix=2
         - id: reservation-service
           uri: lb://reservation-service
           predicates:
-            - Path=/api/reservations/**
+            - Path=/api/reservation/**
           filters:
             - StripPrefix=2
         - id: station-service
           uri: lb://station-service
           predicates:
-            - Path=/api/stations/**
+            - Path=/api/station/**
           filters:
             - StripPrefix=2
