@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("reservation")
 public class ReservationController {
 
     private CustomerHttpCommRest customerHttpCommRest;

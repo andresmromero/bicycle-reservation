@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("pay")
 public class PayController {
 
     @GetMapping("/health-check")
