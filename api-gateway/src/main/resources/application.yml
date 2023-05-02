@@ -10,8 +10,8 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: customer-service
-          uri: lb://customer-service
+        - id: customerservice
+          uri: lb://customerservice
           predicates:
             - Path=/api/customer/**
           filters:

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.HashMap;
 
-@FeignClient(name = "customer-service")
+@FeignClient(name = "customerservice")
 public interface CustomerHttpCommRest {
 
     @GetMapping("customer/health-check")
