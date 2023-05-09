@@ -12,7 +12,7 @@
     <artifactId>shared_kernel</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>shared_kernel-domain</module>
+        <module>shared_kernel-global</module>
     </modules>
 
     <properties>

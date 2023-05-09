@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>com.andresmromero.br.bo</groupId>
-            <artifactId>shared_kernel-domain</artifactId>
+            <artifactId>shared_kernel-global</artifactId>
         </dependency>
     </dependencies>
 
