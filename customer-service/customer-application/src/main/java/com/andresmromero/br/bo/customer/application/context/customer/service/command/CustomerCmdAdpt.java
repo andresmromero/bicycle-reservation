@@ -7,15 +7,24 @@ import com.andresmromero.br.bo.customer.application.context.customer.service.com
 import com.andresmromero.br.bo.customer.application.context.customer.service.command.delete.byId.DeleteCustomerByIdHdl;
 import com.andresmromero.br.bo.customer.application.context.customer.service.command.update.byId.UpdateCustomerByIdCmd;
 import com.andresmromero.br.bo.customer.application.context.customer.service.command.update.byId.UpdateCustomerByIdHdl;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @ApplicationSvc
-@AllArgsConstructor
 public class CustomerCmdAdpt implements CustomerCmdSvc {
 
     private final CreateCustomerHdl createCustomerHdl;
     private final UpdateCustomerByIdHdl updateCustomerHdl;
     private final DeleteCustomerByIdHdl deleteByIdCustomerHdl;
+
+    @Autowired
+    public CustomerCmdAdpt(CreateCustomerHdl createCustomerHdl,
+                           UpdateCustomerByIdHdl updateCustomerHdl,
+                           DeleteCustomerByIdHdl deleteByIdCustomerHdl) {
+
+        this.createCustomerHdl = createCustomerHdl;
+        this.updateCustomerHdl = updateCustomerHdl;
+        this.deleteByIdCustomerHdl = deleteByIdCustomerHdl;
+    }
 
     @Override
     public void save_customer(CreateCustomerCmd command) {

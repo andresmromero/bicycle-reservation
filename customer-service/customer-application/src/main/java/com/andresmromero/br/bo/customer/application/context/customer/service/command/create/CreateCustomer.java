@@ -13,9 +13,8 @@ public class CreateCustomer {
 
     public void create(CustomerAgg adapted) {
 
-        CustomerAgg ww = customerService.save(adapted);
-        System.out.println("=====xx");
-        System.out.println(ww.getName().getValue());
+        customerService.save(adapted);
+
     }
 
 }

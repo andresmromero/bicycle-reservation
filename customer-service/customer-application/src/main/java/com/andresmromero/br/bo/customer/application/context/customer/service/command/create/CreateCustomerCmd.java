@@ -1,7 +1,7 @@
 package com.andresmromero.br.bo.customer.application.context.customer.service.command.create;
 
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.Builder;
 
 import java.util.UUID;
