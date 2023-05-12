@@ -16,20 +16,20 @@ spring:
             - Path=/api/customer/**
           filters:
             - StripPrefix=2
-        - id: pay-service
-          uri: lb://pay-service
+        - id: payservice
+          uri: lb://payservice
           predicates:
             - Path=/api/pay/**
           filters:
             - StripPrefix=2
-        - id: reservation-service
-          uri: lb://reservation-service
+        - id: reservationservice
+          uri: lb://reservationservice
           predicates:
             - Path=/api/reservation/**
           filters:
             - StripPrefix=2
-        - id: station-service
-          uri: lb://station-service
+        - id: stationservice
+          uri: lb://stationservice
           predicates:
             - Path=/api/station/**
           filters:

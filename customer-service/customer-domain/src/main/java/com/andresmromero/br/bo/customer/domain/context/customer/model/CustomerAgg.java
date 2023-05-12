@@ -1,6 +1,6 @@
 package com.andresmromero.br.bo.customer.domain.context.customer.model;
 
-import com.andresmromero.br.bo.context.domain.model.AggregateRoot;
+import com.andresmromero.br.bo.context.domain.model.aggregate_root.AggregateRoot;
 import com.andresmromero.br.bo.context.domain.vo.CellPhoneNumberVo;
 import com.andresmromero.br.bo.context.domain.vo.CustomerId;
 import com.andresmromero.br.bo.context.domain.vo.EmailVo;
