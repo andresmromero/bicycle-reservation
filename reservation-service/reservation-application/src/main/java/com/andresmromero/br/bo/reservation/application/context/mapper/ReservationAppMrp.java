@@ -7,6 +7,7 @@ import com.andresmromero.br.bo.context.domain.vo.MoneyVo;
 import com.andresmromero.br.bo.context.shared.annotation.ApplicationComp;
 import com.andresmromero.br.bo.reservation.application.context.service.command.reservation.create.CreateReservationCmd;
 import com.andresmromero.br.bo.reservation.application.context.service.command.reservation.create.CreateReservationCmdRes;
+import com.andresmromero.br.bo.reservation.application.context.service.query.tracking.byId.FindReservationByIdQryRes;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.reservation.ReservationAgg;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.reservation.ReservationItem;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.reservation.VehicleResv;
@@ -61,6 +62,15 @@ public class ReservationAppMrp {
 
         return CreateReservationCmdRes.builder().message(List.of("Reservation created successfully")).build();
 
+    }
+
+    public FindReservationByIdQryRes reservation_to_findReservationByIdQryRes(ReservationAgg model) {
+
+        return FindReservationByIdQryRes.builder()
+                                        .trackingId(model.getTrackingId().getValue())
+                                        .reservationStatus(model.getStatus())
+                                        .messages(model.getMessageBox())
+                                        .build();
     }
 
 }

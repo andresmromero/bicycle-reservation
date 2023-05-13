@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,12 +29,12 @@ public class ReservationCommandCtrl {
     public HashMap<String, String> index() {
 
         HashMap<String, String> status = new HashMap<>();
-        status.put("application", "customer-command");
+        status.put("application", "reservation-command");
         status.put("status", "ok");
         return status;
     }
 
-    @PatchMapping("/")
+    @PostMapping("/")
     public ResponseEntity<CreateReservationCmdRes> create_reservation(@Valid @RequestBody CreateReservationCmd command) {
 
         CreateReservationCmdRes res = createReservationHdl.handle(command);
