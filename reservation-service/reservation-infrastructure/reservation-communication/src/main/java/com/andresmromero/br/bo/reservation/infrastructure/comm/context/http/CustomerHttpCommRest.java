@@ -9,5 +9,6 @@ import java.util.HashMap;
 public interface CustomerHttpCommRest {
 
     @GetMapping("customer/health-check")
-    public HashMap<String, String> index();
+    HashMap<String, String> index();
+
 }

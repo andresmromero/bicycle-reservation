@@ -2,16 +2,16 @@ package com.andresmromero.br.bo.reservation.domain.context.reservation.entity.re
 
 import com.andresmromero.br.bo.context.domain.model.BaseModel;
 import com.andresmromero.br.bo.context.domain.model.attribute_Id.ReservationId;
-import com.andresmromero.br.bo.context.domain.model.vo.MoneyVo;
+import com.andresmromero.br.bo.context.domain.vo.MoneyVo;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.vo.reservation.ReservationItemId;
 
 public class ReservationItem extends BaseModel<ReservationItemId> {
 
-    private final Vehicle vehicle;
+    private final VehicleResv vehicle;
     private final int quantity;
     private final MoneyVo price;
     private final MoneyVo total;
-    private final ReservationId reservationId;
+    private ReservationId reservationId;
 
     private ReservationItem(Builder builder) {
 
@@ -23,9 +23,23 @@ public class ReservationItem extends BaseModel<ReservationItemId> {
         total = builder.total;
     }
 
+    public boolean is_price_valid() {
 
-    //<editor-fold desc="--> Getter - Builder">
-    public Vehicle getVehicle() {
+
+        boolean priceCalculationItems_totalPrice = price.multiply(quantity).equals(total);
+        boolean greaterThanZero = price.isGreaterThanZero();
+        return greaterThanZero && priceCalculationItems_totalPrice;
+
+    }
+
+    public void init_reservation_item(ReservationId id, ReservationItemId reservationItemId) {
+
+        this.reservationId = reservationId;
+        super.setId(reservationItemId);
+
+    }
+
+    public VehicleResv getVehicle() {
 
         return vehicle;
     }
@@ -53,7 +67,7 @@ public class ReservationItem extends BaseModel<ReservationItemId> {
     public static final class Builder {
 
         private ReservationId reservationId;
-        private Vehicle vehicle;
+        private VehicleResv vehicle;
         private int quantity;
         private MoneyVo price;
         private MoneyVo total;
@@ -72,7 +86,7 @@ public class ReservationItem extends BaseModel<ReservationItemId> {
             return this;
         }
 
-        public Builder vehicle(Vehicle val) {
+        public Builder vehicle(VehicleResv val) {
 
             vehicle = val;
             return this;
@@ -108,6 +122,5 @@ public class ReservationItem extends BaseModel<ReservationItemId> {
         }
 
     }
-    //</editor-fold>
 
 }

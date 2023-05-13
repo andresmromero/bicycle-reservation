@@ -1,16 +1,19 @@
 package com.andresmromero.br.bo.reservation.domain.context.reservation.entity.reservation;
 
 import com.andresmromero.br.bo.context.domain.model.BaseModel;
+import com.andresmromero.br.bo.context.domain.model.attribute_Id.BrandId;
+import com.andresmromero.br.bo.context.domain.model.attribute_Id.ModelId;
 import com.andresmromero.br.bo.context.domain.model.attribute_Id.VehicleId;
+import com.andresmromero.br.bo.context.domain.vo.MoneyVo;
 
-public class Vehicle extends BaseModel<VehicleId> {
+public class VehicleResv extends BaseModel<VehicleId> {
 
-    private final String name;
-    private final String price;
-    private final String brand;
-    private final String model;
+    private final BrandId brand;
+    private final ModelId model;
+    private String name;
+    private MoneyVo price;
 
-    private Vehicle(Builder builder) {
+    private VehicleResv(Builder builder) {
 
         super.setId(builder.vehicleId);
         name = builder.name;
@@ -19,23 +22,28 @@ public class Vehicle extends BaseModel<VehicleId> {
         model = builder.model;
     }
 
-    //<editor-fold desc="--> Getter - Builder">
+    public void update_name_price(String name, MoneyVo price) {
+
+        this.price = price;
+        this.name = name;
+    }
+
     public String getName() {
 
         return name;
     }
 
-    public String getPrice() {
+    public MoneyVo getPrice() {
 
         return price;
     }
 
-    public String getBrand() {
+    public BrandId getBrand() {
 
         return brand;
     }
 
-    public String getModel() {
+    public ModelId getModel() {
 
         return model;
     }
@@ -43,9 +51,9 @@ public class Vehicle extends BaseModel<VehicleId> {
     public static final class Builder {
 
         private String name;
-        private String price;
-        private String brand;
-        private String model;
+        private MoneyVo price;
+        private BrandId brand;
+        private ModelId model;
         private VehicleId vehicleId;
 
         private Builder() {}
@@ -61,36 +69,35 @@ public class Vehicle extends BaseModel<VehicleId> {
             return this;
         }
 
-        public Builder price(String val) {
+        public Builder price(MoneyVo val) {
 
             price = val;
             return this;
         }
 
-        public Builder brand(String val) {
+        public Builder brand(BrandId val) {
 
             brand = val;
             return this;
         }
 
-        public Builder model(String val) {
+        public Builder model(ModelId val) {
 
             model = val;
             return this;
         }
 
-        public Builder id(VehicleId val) {
+        public Builder vehicleId(VehicleId val) {
 
             vehicleId = val;
             return this;
         }
 
-        public Vehicle build() {
+        public VehicleResv build() {
 
-            return new Vehicle(this);
+            return new VehicleResv(this);
         }
 
     }
-    //</editor-fold>
 
 }

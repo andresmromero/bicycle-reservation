@@ -1,4 +1,4 @@
-package com.andresmromero.br.bo.reservation.infrastructure.persistence;
+package com.andresmromero.br.bo.reservation.infra.pers;
 
 public class Main {
     public static void main(String[] args) {

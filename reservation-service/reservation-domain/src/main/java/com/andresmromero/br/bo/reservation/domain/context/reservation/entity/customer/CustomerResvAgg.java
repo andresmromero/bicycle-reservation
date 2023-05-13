@@ -2,27 +2,50 @@ package com.andresmromero.br.bo.reservation.domain.context.reservation.entity.cu
 
 import com.andresmromero.br.bo.context.domain.model.aggregate_root.AggregateRoot;
 import com.andresmromero.br.bo.context.domain.vo.CustomerId;
+import com.andresmromero.br.bo.context.domain.vo.EmailVo;
 
-public class CustomerAgg extends AggregateRoot<CustomerId> {
+public class CustomerResvAgg extends AggregateRoot<CustomerId> {
 
     private final String name;
     private final String surname;
     private final String nickname;
+    private final EmailVo email;
 
-    private CustomerAgg(Builder builder) {
+    private CustomerResvAgg(Builder builder) {
 
         super.setId(builder.customerId);
         name = builder.name;
         surname = builder.surname;
         nickname = builder.nickname;
+        email = builder.email;
     }
 
+    public String getName() {
+
+        return name;
+    }
+
+    public String getSurname() {
+
+        return surname;
+    }
+
+    public String getNickname() {
+
+        return nickname;
+    }
+
+    public EmailVo getEmail() {
+
+        return email;
+    }
 
     public static final class Builder {
 
         private String name;
         private String surname;
         private String nickname;
+        private EmailVo email;
         private CustomerId customerId;
 
         private Builder() {}
@@ -50,15 +73,21 @@ public class CustomerAgg extends AggregateRoot<CustomerId> {
             return this;
         }
 
+        public Builder email(EmailVo val) {
+
+            email = val;
+            return this;
+        }
+
         public Builder customerId(CustomerId val) {
 
             customerId = val;
             return this;
         }
 
-        public CustomerAgg build() {
+        public CustomerResvAgg build() {
 
-            return new CustomerAgg(this);
+            return new CustomerResvAgg(this);
         }
 
     }

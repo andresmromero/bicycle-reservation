@@ -2,26 +2,44 @@ package com.andresmromero.br.bo.reservation.domain.context.reservation.entity.st
 
 import com.andresmromero.br.bo.context.domain.model.aggregate_root.AggregateRoot;
 import com.andresmromero.br.bo.context.domain.model.attribute_Id.StationId;
-import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.reservation.Vehicle;
+import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.reservation.VehicleResv;
 
 import java.util.List;
 
-public class StationAgg extends AggregateRoot<StationId> {
+public class StationResvAgg extends AggregateRoot<StationId> {
 
-    private final List<Vehicle> vehicles;
+    private final List<VehicleResv> vehicles;
     private final boolean isActive;
 
-    private StationAgg(Builder builder) {
+    private StationResvAgg(Builder builder) {
 
         super.setId(builder.stationId);
         vehicles = builder.vehicles;
         isActive = builder.isActive;
     }
 
+    public boolean isActive() {
+
+        return isActive;
+    }
+
+    public void val_init(StationResvAgg station, List<String> messageBox) {
+
+        if (!station.isActive()) {
+            messageBox.add("The station is out of service");
+
+        }
+
+    }
+
+    public List<VehicleResv> getVehicles() {
+
+        return vehicles;
+    }
 
     public static final class Builder {
 
-        private List<Vehicle> vehicles;
+        private List<VehicleResv> vehicles;
         private boolean isActive;
         private StationId stationId;
 
@@ -32,7 +50,7 @@ public class StationAgg extends AggregateRoot<StationId> {
             return new Builder();
         }
 
-        public Builder vehicles(List<Vehicle> val) {
+        public Builder vehicles(List<VehicleResv> val) {
 
             vehicles = val;
             return this;
@@ -50,9 +68,9 @@ public class StationAgg extends AggregateRoot<StationId> {
             return this;
         }
 
-        public StationAgg build() {
+        public StationResvAgg build() {
 
-            return new StationAgg(this);
+            return new StationResvAgg(this);
         }
 
     }

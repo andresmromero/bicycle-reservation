@@ -2,9 +2,11 @@ package com.andresmromero.br.bo.reservation.domain.context.reservation.vo.reserv
 
 import com.andresmromero.br.bo.context.domain.model.attribute_Id.AttributeId;
 
-public class ReservationItemId extends AttributeId<ReservationItemId> {
+import java.util.UUID;
 
-    public ReservationItemId(ReservationItemId value) {
+public class ReservationItemId extends AttributeId<UUID> {
+
+    public ReservationItemId(UUID value) {
 
         super(value);
     }

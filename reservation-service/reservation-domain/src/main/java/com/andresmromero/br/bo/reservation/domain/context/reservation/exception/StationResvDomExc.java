@@ -2,9 +2,9 @@ package com.andresmromero.br.bo.reservation.domain.context.reservation.exception
 
 import com.andresmromero.br.bo.context.domain.model.DomainExc;
 
-public class StationDomExc extends DomainExc {
+public class StationResvDomExc extends DomainExc {
 
-    public StationDomExc(String message) {
+    public StationResvDomExc(String message) {
 
         super(message);
     }

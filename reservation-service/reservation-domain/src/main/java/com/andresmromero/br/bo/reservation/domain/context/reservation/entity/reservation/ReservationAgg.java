@@ -4,21 +4,24 @@ import com.andresmromero.br.bo.context.domain.model.aggregate_root.AggregateRoot
 import com.andresmromero.br.bo.context.domain.model.attribute_Id.ReservationId;
 import com.andresmromero.br.bo.context.domain.model.attribute_Id.StationId;
 import com.andresmromero.br.bo.context.domain.model.enums.ReservationStatus;
-import com.andresmromero.br.bo.context.domain.model.vo.MoneyVo;
 import com.andresmromero.br.bo.context.domain.vo.CustomerId;
+import com.andresmromero.br.bo.context.domain.vo.MoneyVo;
+import com.andresmromero.br.bo.reservation.domain.context.reservation.vo.reservation.ReservationItemId;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.vo.reservation.TrackingId;
 
 import java.util.List;
+import java.util.UUID;
 
 public class ReservationAgg extends AggregateRoot<ReservationId> {
 
     private final CustomerId customerId;
     private final StationId stationId;
     private final MoneyVo price;
-    private final TrackingId trackingId;
-    private final ReservationStatus status;
-    private final List<String> messageBox;
-    List<ReservationItem> items;
+    private final List<ReservationItem> items;
+    private TrackingId trackingId;
+    private ReservationStatus status;
+    private List<String> messageBox;
+
 
     private ReservationAgg(Builder builder) {
 
@@ -32,7 +35,57 @@ public class ReservationAgg extends AggregateRoot<ReservationId> {
         messageBox = builder.messageBox;
     }
 
-    //<editor-fold desc="--> Getter - Builder">
+    public void val_init_reservation(List<String> messageBox) {
+
+
+        if (status != null && getId() != null) {
+            messageBox.add("The station is out of service");
+        }
+
+    }
+
+    public void val_total_price(List<String> messageBox) {
+
+        if (price != null && !price.isGreaterThanZero()) {
+            messageBox.add("the price must be greater than zero");
+        }
+    }
+
+    public void val_items_price(List<String> messageBox) {
+
+        MoneyVo itemsTotal = items.stream().map(item -> {
+            val_item_price(item, messageBox);
+            return item.getTotal();
+        }).reduce(MoneyVo.ZERO, MoneyVo::add);
+
+        if (itemsTotal.equals(price)) {
+
+            messageBox.add("The total price of the reservation and the sum of the vehicles do not coincide");
+        }
+
+    }
+
+    private void val_item_price(ReservationItem item, List<String> messageBox) {
+
+        if (!item.is_price_valid()) {
+            messageBox.add("price is not valid");
+        }
+
+    }
+
+    public void init_reservation(ReservationAgg reservation) {
+
+        setId(new ReservationId(UUID.randomUUID()));
+        trackingId = new TrackingId(UUID.randomUUID());
+        status = ReservationStatus.PENDING;
+
+        for (ReservationItem item : items) {
+            item.init_reservation_item(super.getId(), new ReservationItemId(UUID.randomUUID()));
+        }
+
+    }
+
+
     public CustomerId getCustomerId() {
 
         return customerId;
@@ -66,6 +119,11 @@ public class ReservationAgg extends AggregateRoot<ReservationId> {
     public List<String> getMessageBox() {
 
         return messageBox;
+    }
+
+    public void setMessageBox(List<String> messageBox) {
+
+        this.messageBox = messageBox;
     }
 
     public static final class Builder {
@@ -140,6 +198,5 @@ public class ReservationAgg extends AggregateRoot<ReservationId> {
         }
 
     }
-    //</editor-fold>
 
 }
