@@ -17,6 +17,27 @@ public class EntryAgg extends AggregateRoot<EntryId> {
         total = builder.total;
     }
 
+    public CustomerId getCustomerId() {
+
+        return customerId;
+    }
+
+    public MoneyVo getTotal() {
+
+        return total;
+    }
+
+    public void subtract_money(MoneyVo price) {
+
+        total = total.subtract(price);
+
+    }
+
+    public void add_entry_with(MoneyVo price) {
+
+        total = total.add(price);
+
+    }
 
     public static final class Builder {
 

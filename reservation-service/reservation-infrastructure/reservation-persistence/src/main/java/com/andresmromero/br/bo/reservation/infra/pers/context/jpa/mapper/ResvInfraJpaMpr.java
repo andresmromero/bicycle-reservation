@@ -77,21 +77,21 @@ public class ResvInfraJpaMpr {
 
     }
 
-    private ReservationStatus get_reservation_status(String orderStatus) {
+    private ReservationStatus get_reservation_status(String reservationStatus) {
 
-        if (orderStatus.equals(ReservationStatus.APPROVED.name())) {
+        if (reservationStatus.equals(ReservationStatus.APPROVED.name())) {
             return ReservationStatus.APPROVED;
         }
-        if (orderStatus.equals(ReservationStatus.PAID.name())) {
+        if (reservationStatus.equals(ReservationStatus.PAID.name())) {
             return ReservationStatus.PAID;
         }
-        if (orderStatus.equals(ReservationStatus.CANCELLED.name())) {
+        if (reservationStatus.equals(ReservationStatus.CANCELLED.name())) {
             return ReservationStatus.CANCELLED;
         }
-        if (orderStatus.equals(ReservationStatus.PENDING.name())) {
+        if (reservationStatus.equals(ReservationStatus.PENDING.name())) {
             return ReservationStatus.PENDING;
         }
-        if (orderStatus.equals(ReservationStatus.CANCELLING.name())) {
+        if (reservationStatus.equals(ReservationStatus.CANCELLING.name())) {
             return ReservationStatus.CANCELLING;
         }
 
