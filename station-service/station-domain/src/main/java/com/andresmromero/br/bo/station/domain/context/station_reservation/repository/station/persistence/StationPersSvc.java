@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface StationPersSvc {
 
-    Optional<StationAgg> get_station(StationAgg restaurant);
+    Optional<StationAgg> get_station(StationAgg station);
 
-    ReservationReceivedStn save(ReservationReceivedStn orderApproval);
+    ReservationReceivedStn save_received(ReservationReceivedStn reservationReceived);
 
 }

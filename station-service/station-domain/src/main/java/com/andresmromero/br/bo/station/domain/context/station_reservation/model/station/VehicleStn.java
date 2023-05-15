@@ -10,12 +10,13 @@ public class VehicleStn extends BaseModel<VehicleId> {
 
     private final BrandId brand;
     private final ModelId model;
+    private final int quantity;
     private String name;
     private MoneyVo price;
-    private final int quantity;
     private boolean available;
 
     private VehicleStn(Builder builder) {
+
         super.setId(builder.vehicleId);
         brand = builder.brand;
         model = builder.model;
@@ -25,6 +26,43 @@ public class VehicleStn extends BaseModel<VehicleId> {
         available = builder.available;
     }
 
+    public BrandId getBrand() {
+
+        return brand;
+    }
+
+    public ModelId getModel() {
+
+        return model;
+    }
+
+    public String getName() {
+
+        return name;
+    }
+
+    public MoneyVo getPrice() {
+
+        return price;
+    }
+
+    public int getQuantity() {
+
+        return quantity;
+    }
+
+    public boolean isAvailable() {
+
+        return available;
+    }
+
+    public void update_price_name_available(String name, MoneyVo price, boolean available) {
+
+        this.name = name;
+        this.price = price;
+        this.available = available;
+
+    }
 
     public static final class Builder {
 

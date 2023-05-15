@@ -20,6 +20,20 @@ public class ReservationReceivedStn extends BaseModel<ReservationReceivedId> {
         status = builder.status;
     }
 
+    public StationId getStationId() {
+
+        return stationId;
+    }
+
+    public ReservationId getReservationId() {
+
+        return reservationId;
+    }
+
+    public ReservationReceivedStatus getStatus() {
+
+        return status;
+    }
 
     public static final class Builder {
 
@@ -35,7 +49,7 @@ public class ReservationReceivedStn extends BaseModel<ReservationReceivedId> {
             return new Builder();
         }
 
-        public Builder id(ReservationReceivedId val) {
+        public Builder reservationReceivedId(ReservationReceivedId val) {
 
             reservationReceivedId = val;
             return this;
