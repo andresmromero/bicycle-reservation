@@ -29,17 +29,18 @@ public class PaymentCommandCtrl {
         return status;
     }
 
-    @PatchMapping("/payment/receive/{reservationId}")
+
+    @PutMapping("/payment/receive/{reservationId}")
     public ResponseEntity<ReceivedPaymentRes> receive_payment(@PathVariable("reservationId") UUID reservationId,
-                                                               @Valid @RequestBody ReceivedPaymentCmd command) {
+                                                              @Valid @RequestBody ReceivedPaymentCmd command) {
 
         ReceivedPaymentCmd newCommand = command.withGenericValues(reservationId);
-        paymentCmdAdpt.received_payment(newCommand);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        ReceivedPaymentRes res = paymentCmdAdpt.received_payment(newCommand);
+        return ResponseEntity.ok(res);
 
     }
 
-    @PatchMapping("/payment/cancel/{reservationId}")
+    @PutMapping("/payment/cancel/{reservationId}")
     public ResponseEntity<CanceledPaymentRes> cancel_payment(@PathVariable("reservationId") UUID reservationId,
                                                              @Valid @RequestBody CanceledPaymentCmd command) {
 
@@ -48,4 +49,5 @@ public class PaymentCommandCtrl {
         return ResponseEntity.status(HttpStatus.OK).build();
 
     }
+
 }

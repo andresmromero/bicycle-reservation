@@ -1,8 +1,6 @@
 package com.andresmromero.br.bo.reservation.infra.pers.context.jpa.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -19,6 +17,9 @@ import java.util.UUID;
 public class StationResvJpaEnt {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private UUID stationId;
     private String stationName;
     private Boolean stationActive;

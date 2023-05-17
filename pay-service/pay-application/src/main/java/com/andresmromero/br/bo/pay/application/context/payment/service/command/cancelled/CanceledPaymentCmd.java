@@ -11,6 +11,7 @@ public record CanceledPaymentCmd(@NotNull UUID id,
                                  UUID reservationId,
                                  @NotNull UUID customerId,
                                  @NotNull BigDecimal price,
+                                 @NotNull BigDecimal entry,
 
                                  @NotNull String paymentStatus
 
@@ -18,7 +19,7 @@ public record CanceledPaymentCmd(@NotNull UUID id,
 
     public CanceledPaymentCmd withGenericValues(UUID reservationId) {
 
-        return new CanceledPaymentCmd(id(), reservationId, customerId(), price(), paymentStatus());
+        return new CanceledPaymentCmd(id(), reservationId, customerId(), price(), entry(), paymentStatus());
     }
 
 }

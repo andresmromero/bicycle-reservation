@@ -11,6 +11,7 @@ public record ReceivedPaymentCmd(@NotNull UUID id,
                                  UUID reservationId,
                                  @NotNull UUID customerId,
                                  @NotNull BigDecimal price,
+                                 @NotNull BigDecimal entry,
 
                                  @NotNull String paymentStatus
 
@@ -18,7 +19,7 @@ public record ReceivedPaymentCmd(@NotNull UUID id,
 
     public ReceivedPaymentCmd withGenericValues(UUID reservationId) {
 
-        return new ReceivedPaymentCmd(id(), reservationId, customerId(), price(), paymentStatus());
+        return new ReceivedPaymentCmd(id(), reservationId, customerId(), price(), entry(), paymentStatus());
     }
 
 }

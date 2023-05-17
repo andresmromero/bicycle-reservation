@@ -1,9 +1,6 @@
 package com.andresmromero.br.bo.reservation.infra.pers.context.jpa.mapper;
 
-import com.andresmromero.br.bo.context.domain.model.attribute_Id.BrandId;
-import com.andresmromero.br.bo.context.domain.model.attribute_Id.ModelId;
-import com.andresmromero.br.bo.context.domain.model.attribute_Id.StationId;
-import com.andresmromero.br.bo.context.domain.model.attribute_Id.VehicleId;
+import com.andresmromero.br.bo.context.domain.model.attribute_Id.*;
 import com.andresmromero.br.bo.context.domain.model.enums.ReservationStatus;
 import com.andresmromero.br.bo.context.domain.vo.CustomerId;
 import com.andresmromero.br.bo.context.domain.vo.EmailVo;
@@ -15,12 +12,14 @@ import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.res
 import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.reservation.VehicleResv;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.station.StationResvAgg;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.vo.reservation.TrackingId;
-import com.andresmromero.br.bo.reservation.infra.pers.context.jpa.entity.ReservationJpaEnt;
 import com.andresmromero.br.bo.reservation.infra.pers.context.jpa.entity.CustomerResvJpaEnt;
+import com.andresmromero.br.bo.reservation.infra.pers.context.jpa.entity.ReservationJpaEnt;
 import com.andresmromero.br.bo.reservation.infra.pers.context.jpa.entity.StationResvJpaEnt;
 import com.andresmromero.br.bo.reservation.infra.pers.context.jpa.exception.ResvInfraExc;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @InfrastructureComp
@@ -39,6 +38,7 @@ public class ResvInfraJpaMpr {
     public CustomerResvAgg customerEntity_to_customer(CustomerResvJpaEnt c) {
 
         return CustomerResvAgg.Builder.builder()
+                                      .customerId(new CustomerId(c.getId()))
                                       .name(c.getName())
                                       .surname(c.getSurname())
                                       .nickname(c.getNickname())
@@ -51,7 +51,7 @@ public class ResvInfraJpaMpr {
     public ReservationJpaEnt reservation_to_reservationEntity(ReservationAgg r) {
 
         return ReservationJpaEnt.builder()
-                                .reservationId(r.getCustomerId().getValue())
+                                .reservationId(r.getId().getValue())
                                 .customerId(r.getCustomerId().getValue())
                                 .stationId(r.getStationId().getValue())
                                 .trackingId(r.getTrackingId().getValue())
@@ -66,13 +66,15 @@ public class ResvInfraJpaMpr {
     public ReservationAgg reservationEntity_to_reservation(ReservationJpaEnt r) {
 
         return ReservationAgg.Builder.builder()
+
+                                     .reservationId(new ReservationId(r.getReservationId()))
                                      .customerId(new CustomerId(r.getCustomerId()))
-                                     .stationId(new StationId(r.getReservationId()))
-                                     .price(new MoneyVo(r.getPrice()))
-                                     .items(List.of(ReservationItem.Builder.builder().build()))
+                                     .stationId(new StationId(r.getStationId()))
                                      .trackingId(new TrackingId(r.getTrackingId()))
                                      .status(get_reservation_status(r.getReservationStatus()))
-                                     .messageBox(List.of(r.getMessagesBox()))
+                                     .price(new MoneyVo(r.getPrice()))
+                                     .items(List.of(ReservationItem.Builder.builder().build()))
+                                     .messageBox(new ArrayList<>())
                                      .build();
 
     }
@@ -125,6 +127,31 @@ public class ResvInfraJpaMpr {
                                      .isActive(stationEntity.getStationActive())
                                      .build();
 
+    }
+
+    public CustomerResvJpaEnt customer_to_customerEntity(CustomerResvAgg c) {
+
+        return CustomerResvJpaEnt.builder()
+                                 .id(c.getId().getValue())
+                                 .name(c.getName())
+                                 .surname(c.getSurname())
+                                 .nickname(c.getNickname())
+                                 .email(c.getEmail().getValue())
+                                 .build();
+    }
+
+    public CustomerResvJpaEnt map_entity_to_update_model_customer(Optional<CustomerResvJpaEnt> found,
+                                                                  CustomerResvAgg c) {
+
+
+        found.orElseThrow(() -> new ResvInfraExc("exception thrown when client entity is not found"));
+        CustomerResvJpaEnt customerFound = found.get();
+        customerFound.setId(c.getId().getValue());
+        customerFound.setName(c.getName());
+        customerFound.setSurname(c.getSurname());
+        customerFound.setEmail(c.getEmail().getValue());
+        customerFound.setNickname(c.getNickname());
+        return customerFound;
     }
 
 }

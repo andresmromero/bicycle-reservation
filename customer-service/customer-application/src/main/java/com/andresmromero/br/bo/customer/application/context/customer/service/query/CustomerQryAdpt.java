@@ -7,7 +7,6 @@ import com.andresmromero.br.bo.customer.application.context.customer.service.que
 import com.andresmromero.br.bo.customer.application.context.customer.service.query.get.byId.GetCustomerByIdQry;
 import com.andresmromero.br.bo.customer.application.context.customer.service.query.get.byId.resp.GetCustomerByIdQryResp;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @ApplicationSvc
 @AllArgsConstructor

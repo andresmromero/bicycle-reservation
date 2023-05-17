@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class PaymentDomAdpt implements PaymentDomSvc {
@@ -34,7 +33,7 @@ public class PaymentDomAdpt implements PaymentDomSvc {
             payment.setStatus(PaymentStatus.CANCELED);
         }
         payment.setMessageBox(messageBox);
-        return new PaymentDomRes(payment);
+        return new PaymentDomRes(payment, entry, entryHistoryList);
     }
 
     private void update_entry_history(PaymentAgg payment,
@@ -43,7 +42,7 @@ public class PaymentDomAdpt implements PaymentDomSvc {
 
 
         entryHistoryList.add(EntryHistoryAgg.Builder.builder()
-                                                    .id(new EntryHistoryId(UUID.randomUUID()))
+                                                    .id(new EntryHistoryId(payment.getReservationId().getValue()))
                                                     .customerId(payment.getCustomerId())
                                                     .total(payment.getPrice())
                                                     .transactionType(transactionType)
@@ -85,7 +84,7 @@ public class PaymentDomAdpt implements PaymentDomSvc {
         }
 
         payment.setMessageBox(messageBox);
-        return new PaymentDomRes(payment);
+        return new PaymentDomRes(payment, entry, entryHistoryList);
 
     }
 

@@ -1,5 +1,6 @@
 package com.andresmromero.br.bo.reservation.infra.pers.context.jpa.adapter;
 
+import com.andresmromero.br.bo.context.domain.model.attribute_Id.ReservationId;
 import com.andresmromero.br.bo.context.shared.annotation.InfrastructureSvc;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.reservation.ReservationAgg;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.repository.persistence.ReservationResvPersSvc;
@@ -36,6 +37,23 @@ public class ReservationJpaAdpt implements ReservationResvPersSvc {
                                              .map(resvInfraJpaMpr::reservationEntity_to_reservation)
                                              .orElseThrow(() -> new ResvInfraExc("Error when finding for tracking id")));
 
+    }
+
+    @Override
+    public Optional<ReservationAgg> get_reservation(ReservationId reservationId) {
+
+        UUID id = reservationId.getValue();
+        return Optional.of(reservationJpaRepo.findByReservationId(id)
+                                             .map(resvInfraJpaMpr::reservationEntity_to_reservation)
+                                             .orElseThrow(() -> new ResvInfraExc("Error finding reservation")));
+
+    }
+
+    @Override
+    public Optional<ReservationAgg> update_status_reservation(ReservationAgg reservation) {
+
+
+        return Optional.empty();
     }
 
 }

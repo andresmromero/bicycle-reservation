@@ -12,4 +12,6 @@ public interface ReservationJpaRepo extends JpaRepository<ReservationJpaEnt, UUI
 
     Optional<ReservationJpaEnt> findByTrackingId(UUID trackingId);
 
+    Optional<ReservationJpaEnt> findByReservationId(UUID reservationId);
+
 }

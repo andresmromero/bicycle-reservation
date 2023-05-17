@@ -10,10 +10,10 @@ public class ReservationDomHelp {
 
     public void set_reservation_vehicle(ReservationAgg reservation, StationResvAgg station) {
 
-        reservation.getItems().forEach(x -> station.getVehicles().forEach(vehiclesListItem -> {
+        reservation.getItems().forEach(x -> station.getVehicles().forEach(vehicleListItem -> {
             VehicleResv vehicle = x.getVehicle();
-            if (vehicle.equals(vehiclesListItem)) {
-                vehicle.update_name_price(vehiclesListItem.getName(), vehiclesListItem.getPrice());
+            if (vehicle.equals(vehicleListItem)) {
+                vehicle.update_name_price(vehicleListItem.getName(), vehicleListItem.getPrice());
             }
         }));
 

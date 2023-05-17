@@ -37,6 +37,8 @@ public class StationResevJpaAdpt implements StationPersSvc {
     @Override
     public ReservationReceivedStn save_received(ReservationReceivedStn reservationReceived) {
 
+        ReservationReceivedStn elem = reservationReceived;
+
         ResevReceiveJpaEnt toEntity =
                 stationInfraMpr.reservationReceive_to_reservationReceiveEntity(reservationReceived);
         reservationReceiveJpaRepo.save(toEntity);

@@ -6,6 +6,7 @@ import com.andresmromero.br.bo.reservation.application.context.mapper.Reservatio
 import com.andresmromero.br.bo.reservation.application.context.service.ReservationHelp;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.reservation.ReservationAgg;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.station.StationResvAgg;
+import com.andresmromero.br.bo.reservation.domain.context.reservation.repository.comm.ReservationCommService;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.service.ReservationDomSvc;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.service.response.ReservationCreatedDomRes;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ public class CreateReservation {
     private final ReservationHelp reservationHelp;
     private final ReservationAppMrp reservationAppMrp;
     private final ReservationDomSvc reservationDomSvc;
+    private final ReservationCommService reservationCommService;
 
     public CreateReservationCmdRes invoke(CreateReservationCmd command) {
 
@@ -30,16 +32,24 @@ public class CreateReservation {
         ReservationCreatedDomRes reservationCreatedDomRes =
                 reservationDomSvc.initReservation(reservation, stationWithListStationVehicles);
 
-        persistenceReservations(reservationCreatedDomRes);
 
-        CreateReservationCmdRes response =
-                reservationAppMrp.reservation_to_createReservationCmdRes(reservationCreatedDomRes.getReservation());
-        return response;
+        // reservationCommService.send_payment(reservationCreatedDomRes, PaymentStatus.PENDING);
+
+        if (reservationCreatedDomRes.getMessageBox().isEmpty()) {
+
+            persistenceReservations(reservation);
+            reservationCreatedDomRes.getMessageBox().add("Reservation created successfully");
+
+        }
+
+
+        return reservationAppMrp.reservation_to_createReservationCmdRes(reservationCreatedDomRes.getMessageBox());
+
     }
 
-    private void persistenceReservations(ReservationCreatedDomRes reservationCreatedDomRes) {
+    private void persistenceReservations(ReservationAgg reservation) {
 
-        reservationHelp.save_reservation(reservationCreatedDomRes.getReservation());
+        reservationHelp.save_reservation(reservation);
     }
 
 }

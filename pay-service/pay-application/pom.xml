@@ -31,6 +31,10 @@
             <groupId>com.andresmromero.br.bo</groupId>
             <artifactId>pay-shared</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.andresmromero.br.bo</groupId>
+            <artifactId>reservation-domain</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

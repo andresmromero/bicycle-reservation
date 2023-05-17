@@ -10,9 +10,9 @@ import com.andresmromero.br.bo.station.domain.context.station_reservation.model.
 import com.andresmromero.br.bo.station.domain.context.station_reservation.model.station.ReservationReceivedStn;
 import com.andresmromero.br.bo.station.domain.context.station_reservation.model.station.StationAgg;
 import com.andresmromero.br.bo.station.domain.context.station_reservation.model.station.VehicleStn;
+import com.andresmromero.br.bo.station.infra.pers.context.jpa.exception.StationResevInfraExc;
 import com.andresmromero.br.bo.station.infra.pers.context.jpa.station_resev.entity.ResevReceiveJpaEnt;
 import com.andresmromero.br.bo.station.infra.pers.context.jpa.station_resev.entity.StationResevJpaEnt;
-import com.andresmromero.br.bo.station.infra.pers.context.jpa.exception.StationResevInfraExc;
 
 import java.util.List;
 import java.util.UUID;

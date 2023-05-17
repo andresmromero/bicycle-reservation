@@ -12,7 +12,6 @@ public class ReceivedPaymentHdl {
     public ReceivedPaymentRes handle(ReceivedPaymentCmd command) {
 
         return receivedPayment.invoke(command);
-
     }
 
 }

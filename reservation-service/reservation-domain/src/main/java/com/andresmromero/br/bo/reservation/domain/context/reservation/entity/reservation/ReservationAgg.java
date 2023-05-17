@@ -58,7 +58,7 @@ public class ReservationAgg extends AggregateRoot<ReservationId> {
             return item.getTotal();
         }).reduce(MoneyVo.ZERO, MoneyVo::add);
 
-        if (itemsTotal.equals(price)) {
+        if (itemsTotal.getAmount().compareTo(price.getAmount()) != 0) {
 
             messageBox.add("The total price of the reservation and the sum of the vehicles do not coincide");
         }
@@ -84,7 +84,6 @@ public class ReservationAgg extends AggregateRoot<ReservationId> {
         }
 
     }
-
 
     public CustomerId getCustomerId() {
 
@@ -114,6 +113,11 @@ public class ReservationAgg extends AggregateRoot<ReservationId> {
     public ReservationStatus getStatus() {
 
         return status;
+    }
+
+    public void setStatus(ReservationStatus status) {
+
+        this.status = status;
     }
 
     public List<String> getMessageBox() {

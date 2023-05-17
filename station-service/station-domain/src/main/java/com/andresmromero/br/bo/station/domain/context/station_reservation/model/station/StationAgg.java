@@ -13,9 +13,9 @@ import java.util.UUID;
 
 public class StationAgg extends AggregateRoot<StationId> {
 
+    private final ReservationDetailStn reservationDetail;
     private ReservationReceivedStn reservationReceived;
     private boolean isActive;
-    private final ReservationDetailStn reservationDetail;
 
     private StationAgg(Builder builder) {
 

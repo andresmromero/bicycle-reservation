@@ -21,7 +21,7 @@ public class EntryHistoryJpaEnt {
 
 
     @Id
-    private UUID id;
+    private UUID entryHistoryId;
     private UUID customerId;
     private BigDecimal total;
     private TransactionType type;
@@ -37,14 +37,14 @@ public class EntryHistoryJpaEnt {
             return false;
         }
         EntryHistoryJpaEnt that = (EntryHistoryJpaEnt) o;
-        return id.equals(that.id) && Objects.equals(customerId, that.customerId) && Objects.equals(total, that.total) &&
-                type == that.type;
+        return entryHistoryId.equals(that.entryHistoryId) && Objects.equals(customerId, that.customerId) &&
+                Objects.equals(total, that.total) && type == that.type;
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, customerId, total, type);
+        return Objects.hash(entryHistoryId, customerId, total, type);
     }
 
 }

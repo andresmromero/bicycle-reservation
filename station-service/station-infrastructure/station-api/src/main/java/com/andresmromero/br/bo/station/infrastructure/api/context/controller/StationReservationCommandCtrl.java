@@ -26,9 +26,9 @@ public class StationReservationCommandCtrl {
         return status;
     }
 
-    @PatchMapping("/receive/{reservationId}")
+    @PutMapping("/receive/{reservationId}")
     public ResponseEntity<ReceiveReservationRes> receive_reservation(@PathVariable("reservationId") UUID reservationId,
-                                                                 @Valid @RequestBody ReceiveReservationCmd command) {
+                                                                     @Valid @RequestBody ReceiveReservationCmd command) {
 
         ReceiveReservationRes resp = stationReservationCmdSvs.receive_reservation(command);
         return ResponseEntity.ok(resp);

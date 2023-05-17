@@ -1,9 +1,13 @@
 package com.andresmromero.br.bo.pay.application.context.payment.service;
 
+import com.andresmromero.br.bo.context.domain.model.attribute_Id.EntryId;
 import com.andresmromero.br.bo.context.domain.model.attribute_Id.ReservationId;
 import com.andresmromero.br.bo.context.domain.vo.CustomerId;
+import com.andresmromero.br.bo.context.domain.vo.MoneyVo;
 import com.andresmromero.br.bo.context.shared.annotation.ApplicationComp;
 import com.andresmromero.br.bo.pay.application.context.exception.PayAppExc;
+import com.andresmromero.br.bo.pay.application.context.payment.service.command.cancelled.CanceledPaymentCmd;
+import com.andresmromero.br.bo.pay.application.context.payment.service.command.received.ReceivedPaymentCmd;
 import com.andresmromero.br.bo.pay.domain.content.payment.model.payment.EntryAgg;
 import com.andresmromero.br.bo.pay.domain.content.payment.model.payment.EntryHistoryAgg;
 import com.andresmromero.br.bo.pay.domain.content.payment.model.payment.PaymentAgg;
@@ -12,6 +16,7 @@ import com.andresmromero.br.bo.pay.domain.content.payment.repository.persistence
 import com.andresmromero.br.bo.pay.domain.content.payment.repository.persistence.PaymentPersSvc;
 import lombok.AllArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -23,16 +28,14 @@ public class PaymentHelp {
     private final PaymentPersSvc paymentPersSvc;
 
 
-    public EntryAgg get_entry(CustomerId id) {
-
-        return entryPersSvc.get_by_customerId(id)
-                           .orElseThrow(() -> new PayAppExc("No entries related to the user are found"));
-
-    }
-
     public List<EntryHistoryAgg> get_entry_history(CustomerId customerId) {
 
-        return entryHistoryPersSvc.get_by_customerId(customerId);
+        List<EntryHistoryAgg> entryHistory = entryHistoryPersSvc.get_by_customerId(customerId);
+
+        if (entryHistory.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return entryHistory;
     }
 
     public void save_payment(PaymentAgg payment) {
@@ -58,6 +61,24 @@ public class PaymentHelp {
         return paymentPersSvc.get_by_reservationId(reservationId).orElseThrow(
 
                 () -> new PayAppExc("Payment no found"));
+    }
+
+    public EntryAgg get_entry(CustomerId customerId, ReceivedPaymentCmd command) {
+
+        return EntryAgg.Builder.builder()
+                               .id(new EntryId(command.reservationId()))
+                               .customerId(new CustomerId(command.customerId()))
+                               .total(new MoneyVo(command.entry()))
+                               .build();
+    }
+
+    public EntryAgg get_entry_cancel(CustomerId customerId, CanceledPaymentCmd command) {
+
+        return EntryAgg.Builder.builder()
+                               .id(new EntryId(command.reservationId()))
+                               .customerId(new CustomerId(command.customerId()))
+                               .total(new MoneyVo(command.entry()))
+                               .build();
     }
 
 }

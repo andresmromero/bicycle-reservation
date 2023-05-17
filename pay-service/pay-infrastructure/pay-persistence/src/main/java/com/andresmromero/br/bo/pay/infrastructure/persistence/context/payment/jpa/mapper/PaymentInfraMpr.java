@@ -21,7 +21,7 @@ public class PaymentInfraMpr {
     public EntryHistoryJpaEnt entryHistory_to_entryHistoryEntity(EntryHistoryAgg eh) {
 
         return EntryHistoryJpaEnt.builder()
-                                 .id(eh.getCustomerId().getValue())
+                                 .entryHistoryId(eh.getId().getValue())
                                  .customerId(eh.getCustomerId().getValue())
                                  .total(eh.getTotal().getAmount())
                                  .type(eh.getTransactionType())
@@ -76,7 +76,7 @@ public class PaymentInfraMpr {
 
 
         return PaymentJpaEnt.builder()
-                            .id(p.getId().getValue())
+                            .id(p.getReservationId().getValue())
                             .customerId(p.getCustomerId().getValue())
                             .reservationId(p.getReservationId().getValue())
                             .price(p.getPrice().getAmount())
@@ -88,7 +88,7 @@ public class PaymentInfraMpr {
     public PaymentAgg paymentEntity_to_payment(PaymentJpaEnt p) {
 
         return PaymentAgg.Builder.builder()
-                                 .paymentId(new PaymentId(p.getId()))
+                                 .paymentId(new PaymentId(p.getReservationId()))
                                  .reservationId(new ReservationId(p.getReservationId()))
                                  .price(new MoneyVo(p.getPrice()))
                                  .customerId(new CustomerId(p.getCustomerId()))
