@@ -35,7 +35,7 @@ public class PaymentAgg extends AggregateRoot<PaymentId> {
     public void val_init(List<String> messageBox) {
 
         if (price == null && price.isGreaterThanZero()) {
-            messageBox.add("Precio del pago es invalido");
+            messageBox.add("Payment price is invalid");
         }
 
     }

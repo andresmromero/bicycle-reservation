@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @ApplicationSvc("CustomerJpaAdapter")
 public class CustomerJpaAdpt implements CustomerSvc {
@@ -30,7 +31,7 @@ public class CustomerJpaAdpt implements CustomerSvc {
     public CustomerAgg save(CustomerAgg customer) {
 
 
-        Optional<CustomerJpaEnt> isExist = customerRepository.findById(customer.getId().getValue().toString());
+        Optional<CustomerJpaEnt> isExist = customerRepository.findById(customer.getId().getValue());
 
         if (isExist.isPresent()) {
             throw new CustomerPersExc("Exception thrown on finding the client id of the client to be saved");
@@ -39,7 +40,7 @@ public class CustomerJpaAdpt implements CustomerSvc {
 
         CustomerJpaEnt customerEntity = customerMapper.customer_to_customerEntity(customer);
         CustomerJpaEnt saved = customerRepository.save(customerEntity);
-        return customerMapper.customerEntity_to_customer(customerEntity);
+        return customer;
 
     }
 
@@ -52,7 +53,7 @@ public class CustomerJpaAdpt implements CustomerSvc {
     @Override
     public Optional<CustomerAgg> get_customer_by_id(CustomerId customerId) {
 
-        String customerIdOfEntity = customerId.getValue().toString();
+        UUID customerIdOfEntity = customerId.getValue();
 
         return Optional.of(customerRepository.findById(customerIdOfEntity)
                                              .map(customerMapper::customerEntity_to_customer)
@@ -63,7 +64,7 @@ public class CustomerJpaAdpt implements CustomerSvc {
     @Override
     public CustomerAgg update_by_id(CustomerAgg customer) {
 
-        Optional<CustomerJpaEnt> find = Optional.of(customerRepository.findById(customer.getId().getValue().toString())
+        Optional<CustomerJpaEnt> find = Optional.of(customerRepository.findById(customer.getId().getValue())
                                                                       .orElseThrow(() -> new CustomerPersExc(
                                                                               "Exception thrown when finding for an id to update")));
 
@@ -76,7 +77,7 @@ public class CustomerJpaAdpt implements CustomerSvc {
     @Override
     public void delete_by_id(CustomerId customerId) {
 
-        customerRepository.deleteById(customerId.getValue().toString());
+        customerRepository.deleteById(customerId.getValue());
     }
 
 }

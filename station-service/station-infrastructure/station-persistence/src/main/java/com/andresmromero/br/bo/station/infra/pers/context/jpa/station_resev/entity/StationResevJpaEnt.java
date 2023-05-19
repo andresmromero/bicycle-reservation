@@ -1,8 +1,6 @@
 package com.andresmromero.br.bo.station.infra.pers.context.jpa.station_resev.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -19,6 +17,9 @@ import java.util.UUID;
 public class StationResevJpaEnt {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private UUID stationId;
 
     private UUID vehicleId;
@@ -34,6 +35,7 @@ public class StationResevJpaEnt {
     private Boolean vehicleAvailable;
     private UUID vehicleBrand;
     private UUID vehicleModel;
+    private Boolean stationActive;
 
     @Override
     public boolean equals(Object o) {
@@ -45,23 +47,29 @@ public class StationResevJpaEnt {
             return false;
         }
         StationResevJpaEnt that = (StationResevJpaEnt) o;
-        return stationId.equals(that.stationId) && Objects.equals(vehicleId, that.vehicleId) &&
-                Objects.equals(stationName, that.stationName) &&
+        return id.equals(that.id) && Objects.equals(stationId, that.stationId) &&
+                Objects.equals(vehicleId, that.vehicleId) && Objects.equals(stationName, that.stationName) &&
                 Objects.equals(vehicleIsActive, that.vehicleIsActive) &&
                 Objects.equals(vehicleName, that.vehicleName) && Objects.equals(vehiclePrice, that.vehiclePrice) &&
-                Objects.equals(vehicleAvailable, that.vehicleAvailable);
+                Objects.equals(vehicleAvailable, that.vehicleAvailable) &&
+                Objects.equals(vehicleBrand, that.vehicleBrand) && Objects.equals(vehicleModel, that.vehicleModel) &&
+                Objects.equals(stationActive, that.stationActive);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(stationId,
+        return Objects.hash(id,
+                            stationId,
                             vehicleId,
                             stationName,
                             vehicleIsActive,
                             vehicleName,
                             vehiclePrice,
-                            vehicleAvailable);
+                            vehicleAvailable,
+                            vehicleBrand,
+                            vehicleModel,
+                            stationActive);
     }
 
 }

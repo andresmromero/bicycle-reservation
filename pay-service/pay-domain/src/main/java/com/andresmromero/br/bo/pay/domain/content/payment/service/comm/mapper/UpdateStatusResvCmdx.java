@@ -1,11 +1,15 @@
 package com.andresmromero.br.bo.pay.domain.content.payment.service.comm.mapper;
 
-public class UpdateStatusResvCmd {
+public class UpdateStatusResvCmdx {
 
     private String conditional;
     private String newStatus;
 
-    public UpdateStatusResvCmd(String conditional, String newStatus) {
+    public UpdateStatusResvCmdx() {
+
+    }
+
+    public UpdateStatusResvCmdx(String conditional, String newStatus) {
 
         this.conditional = conditional;
         this.newStatus = newStatus;

@@ -7,6 +7,7 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "customer")
@@ -18,7 +19,7 @@ import java.util.Objects;
 public class CustomerJpaEnt {
 
     @Id
-    private String id;
+    private UUID id;
     @Column
     private String name;
     @Column

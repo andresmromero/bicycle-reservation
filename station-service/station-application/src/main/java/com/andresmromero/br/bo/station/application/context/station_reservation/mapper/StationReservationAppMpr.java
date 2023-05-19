@@ -8,10 +8,15 @@ import com.andresmromero.br.bo.context.domain.vo.MoneyVo;
 import com.andresmromero.br.bo.context.shared.annotation.ApplicationComp;
 import com.andresmromero.br.bo.station.application.context.station_reservation.exception.StationReservationAppExc;
 import com.andresmromero.br.bo.station.application.context.station_reservation.service.command.reservation.receive.ReceiveReservationCmd;
+import com.andresmromero.br.bo.station.application.context.station_reservation.service.command.stat_resev.create.CreateStatResevCmd;
+import com.andresmromero.br.bo.station.application.context.station_reservation.service.command.stat_resev.update.byId.UpdStatResevIdCmd;
+import com.andresmromero.br.bo.station.application.context.station_reservation.service.query.get.available.resp.GetAvailableMainQryResp;
+import com.andresmromero.br.bo.station.domain.context.station_reservation.entity.StationReservEnt;
 import com.andresmromero.br.bo.station.domain.context.station_reservation.model.station.ReservationDetailStn;
 import com.andresmromero.br.bo.station.domain.context.station_reservation.model.station.StationAgg;
 import com.andresmromero.br.bo.station.domain.context.station_reservation.model.station.VehicleStn;
 
+import java.util.List;
 import java.util.UUID;
 
 @ApplicationComp
@@ -71,6 +76,55 @@ public class StationReservationAppMpr {
             return ReservationStatus.CANCELLING;
         }
         throw new StationReservationAppExc("Reservation status no found");
+    }
+
+    public StationReservEnt createStatResevCmd_to_stationReservEnt(CreateStatResevCmd c) {
+
+        return new StationReservEnt(c.stationId(),
+                                    c.vehicleId(),
+                                    c.stationName(),
+                                    c.vehicleIsActive(),
+                                    c.vehicleName(),
+                                    c.vehiclePrice(),
+                                    c.vehicleAvailable(),
+                                    c.vehicleBrand(),
+                                    c.vehicleModel(),
+                                    c.stationActive());
+
+    }
+
+    public List<GetAvailableMainQryResp> list_stationReserv_to_getAvailableMainQryResp(List<StationReservEnt> m) {
+
+        return m.stream()
+                .map(x -> GetAvailableMainQryResp.builder()
+                                                 .stationId(x.getStationId())
+                                                 .vehicleId(x.getVehicleId())
+                                                 .stationName(x.getStationName())
+                                                 .vehicleIsActive(x.getVehicleIsActive())
+                                                 .vehicleName(x.getVehicleName())
+                                                 .vehiclePrice(x.getVehiclePrice())
+                                                 .vehicleAvailable(x.getVehicleAvailable())
+                                                 .vehicleBrand(x.getVehicleBrand())
+                                                 .vehicleModel(x.getVehicleModel())
+                                                 .stationActive(x.getStationActive())
+                                                 .build())
+
+                .toList();
+
+    }
+
+    public StationReservEnt updateStatResevByIdCmd_to_stationReservEnt(UpdStatResevIdCmd c) {
+
+        return new StationReservEnt(c.stationId(),
+                                    c.vehicleId(),
+                                    c.stationName(),
+                                    c.vehicleIsActive(),
+                                    c.vehicleName(),
+                                    c.vehiclePrice(),
+                                    c.vehicleAvailable(),
+                                    c.vehicleBrand(),
+                                    c.vehicleModel(),
+                                    c.stationActive());
     }
 
 }

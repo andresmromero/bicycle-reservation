@@ -1,7 +1,7 @@
 package com.andresmromero.br.bo.pay.infrastructure.comm.context.http;
 
-import com.andresmromero.br.bo.pay.domain.content.payment.service.comm.mapper.UpdateStatusResvCmd;
 import com.andresmromero.br.bo.pay.domain.content.payment.service.comm.mapper.UpdateStatusResvCmdRes;
+import com.andresmromero.br.bo.pay.domain.content.payment.service.comm.mapper.UpdateStatusResvCmdx;
 import jakarta.validation.Valid;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +15,7 @@ public interface ReservationHttpCommRest {
 
 
     @PutMapping("/status/{reservationId}")
-    UpdateStatusResvCmdRes update_status_reservation(@Valid @RequestBody UpdateStatusResvCmd command,
+    UpdateStatusResvCmdRes update_status_reservation(@Valid @RequestBody UpdateStatusResvCmdx command,
                                                      @PathVariable("reservationId") UUID reservationId);
 
 }

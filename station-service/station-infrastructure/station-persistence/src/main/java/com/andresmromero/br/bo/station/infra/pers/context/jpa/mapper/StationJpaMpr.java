@@ -6,6 +6,7 @@ import com.andresmromero.br.bo.context.domain.model.attribute_Id.StationId;
 import com.andresmromero.br.bo.context.domain.model.attribute_Id.VehicleId;
 import com.andresmromero.br.bo.context.domain.vo.MoneyVo;
 import com.andresmromero.br.bo.context.shared.annotation.InfrastructureComp;
+import com.andresmromero.br.bo.station.domain.context.station_reservation.entity.StationReservEnt;
 import com.andresmromero.br.bo.station.domain.context.station_reservation.model.station.ReservationDetailStn;
 import com.andresmromero.br.bo.station.domain.context.station_reservation.model.station.ReservationReceivedStn;
 import com.andresmromero.br.bo.station.domain.context.station_reservation.model.station.StationAgg;
@@ -59,6 +60,56 @@ public class StationJpaMpr {
                                  .isActive(stationEntity.getVehicleIsActive())
                                  .build();
 
+    }
+
+    public List<StationReservEnt> stationResevJpaEnt_to_stationResev(List<StationResevJpaEnt> s) {
+
+        return s.stream()
+                .map(e -> new StationReservEnt(e.getStationId(),
+                                               e.getVehicleId(),
+                                               e.getStationName(),
+                                               e.getVehicleIsActive(),
+                                               e.getVehicleName(),
+                                               e.getVehiclePrice(),
+                                               e.getVehicleAvailable(),
+                                               e.getVehicleBrand(),
+                                               e.getVehicleModel(),
+                                               e.getStationActive()))
+                .toList();
+    }
+
+
+    public StationResevJpaEnt stationReservEnt_to_customerEntity(StationReservEnt s) {
+
+        return StationResevJpaEnt.builder()
+                                 .stationId(s.getStationId())
+                                 .vehicleId(s.getVehicleId())
+                                 .stationName(s.getStationName())
+                                 .vehicleIsActive(s.getVehicleIsActive())
+                                 .vehicleName(s.getVehicleName())
+                                 .vehiclePrice(s.getVehiclePrice())
+                                 .vehicleAvailable(s.getVehicleAvailable())
+                                 .vehicleBrand(s.getVehicleBrand())
+                                 .vehicleModel(s.getVehicleModel())
+                                 .stationActive(s.getStationActive())
+                                 .build();
+
+    }
+
+    public StationReservEnt stationResevJpaEnt_to_stationReservEnt(StationResevJpaEnt s) {
+
+        return new StationReservEnt(s.getStationId(),
+                                    s.getVehicleId(),
+                                    s.getStationName(),
+                                    s.getVehicleIsActive(),
+                                    s.getVehicleName(),
+                                    s.getVehiclePrice(),
+                                    s.getVehicleAvailable(),
+                                    s.getVehicleBrand(),
+                                    s.getVehicleModel(),
+                                    s.getStationActive()
+
+        );
     }
 
 }

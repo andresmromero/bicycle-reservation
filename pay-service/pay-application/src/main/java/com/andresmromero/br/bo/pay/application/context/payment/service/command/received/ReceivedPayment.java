@@ -10,8 +10,8 @@ import com.andresmromero.br.bo.pay.domain.content.payment.model.payment.EntryHis
 import com.andresmromero.br.bo.pay.domain.content.payment.model.payment.PaymentAgg;
 import com.andresmromero.br.bo.pay.domain.content.payment.repository.comm.PaymentCommService;
 import com.andresmromero.br.bo.pay.domain.content.payment.service.PaymentDomSvc;
-import com.andresmromero.br.bo.pay.domain.content.payment.service.comm.mapper.UpdateStatusResvCmd;
 import com.andresmromero.br.bo.pay.domain.content.payment.service.comm.mapper.UpdateStatusResvCmdRes;
+import com.andresmromero.br.bo.pay.domain.content.payment.service.comm.mapper.UpdateStatusResvCmdx;
 import com.andresmromero.br.bo.pay.domain.content.payment.service.response.PaymentDom;
 import lombok.AllArgsConstructor;
 
@@ -48,8 +48,8 @@ public class ReceivedPayment {
         paymentHelp.save_entry_history(entryHistory);
 
         if (payment.getMessageBox().isEmpty()) {
-            UpdateStatusResvCmd changeStatusReservation =
-                    new UpdateStatusResvCmd(ReservationStatus.PENDING.name(), ReservationStatus.PAID.name());
+            UpdateStatusResvCmdx changeStatusReservation =
+                    new UpdateStatusResvCmdx(ReservationStatus.PENDING.name(), ReservationStatus.PAID.name());
 
             UpdateStatusResvCmdRes changeStatusReservationRes = paymentCommService.update_status_reservation(
                     changeStatusReservation,
@@ -57,7 +57,7 @@ public class ReceivedPayment {
 
             if (changeStatusReservationRes != null) {
 
-                payment.getMessageBox().add(changeStatusReservationRes.getMessage().toString());
+                payment.getMessageBox().add(changeStatusReservationRes.message().toString());
             }
         }
 

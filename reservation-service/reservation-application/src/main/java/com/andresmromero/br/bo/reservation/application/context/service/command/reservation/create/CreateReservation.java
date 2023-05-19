@@ -6,10 +6,11 @@ import com.andresmromero.br.bo.reservation.application.context.mapper.Reservatio
 import com.andresmromero.br.bo.reservation.application.context.service.ReservationHelp;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.reservation.ReservationAgg;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.station.StationResvAgg;
-import com.andresmromero.br.bo.reservation.domain.context.reservation.repository.comm.ReservationCommService;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.service.ReservationDomSvc;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.service.response.ReservationCreatedDomRes;
 import lombok.AllArgsConstructor;
+
+import java.util.HashMap;
 
 @ApplicationComp
 @AllArgsConstructor
@@ -19,7 +20,6 @@ public class CreateReservation {
     private final ReservationHelp reservationHelp;
     private final ReservationAppMrp reservationAppMrp;
     private final ReservationDomSvc reservationDomSvc;
-    private final ReservationCommService reservationCommService;
 
     public CreateReservationCmdRes invoke(CreateReservationCmd command) {
 
@@ -31,19 +31,19 @@ public class CreateReservation {
 
         ReservationCreatedDomRes reservationCreatedDomRes =
                 reservationDomSvc.initReservation(reservation, stationWithListStationVehicles);
-
-
-        // reservationCommService.send_payment(reservationCreatedDomRes, PaymentStatus.PENDING);
-
+        HashMap<String, String> dataResponse = new HashMap<String, String>();
         if (reservationCreatedDomRes.getMessageBox().isEmpty()) {
 
             persistenceReservations(reservation);
             reservationCreatedDomRes.getMessageBox().add("Reservation created successfully");
+            dataResponse.put("reservationId", reservation.getId().getValue().toString());
+            dataResponse.put("trackingId", reservation.getTrackingId().getValue().toString());
 
         }
 
 
-        return reservationAppMrp.reservation_to_createReservationCmdRes(reservationCreatedDomRes.getMessageBox());
+        return reservationAppMrp.reservation_to_createReservationCmdRes(reservationCreatedDomRes.getMessageBox(),
+                                                                        dataResponse);
 
     }
 

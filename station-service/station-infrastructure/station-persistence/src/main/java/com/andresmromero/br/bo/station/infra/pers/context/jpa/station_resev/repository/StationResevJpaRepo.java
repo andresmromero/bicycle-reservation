@@ -9,8 +9,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface StationResevJpaRepo extends JpaRepository<StationResevJpaEnt, UUID> {
+public interface StationResevJpaRepo extends JpaRepository<StationResevJpaEnt, Long> {
 
     Optional<List<StationResevJpaEnt>> findByStationIdAndVehicleIdIn(UUID stationId, List<UUID> vehicleIds);
+
+    Optional<StationResevJpaEnt> findByStationId(UUID stationId);
 
 }

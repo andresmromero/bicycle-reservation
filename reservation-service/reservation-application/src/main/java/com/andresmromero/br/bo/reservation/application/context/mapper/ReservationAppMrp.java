@@ -20,6 +20,7 @@ import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.res
 import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.reservation.VehicleResv;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.station.StationResvAgg;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
 
@@ -56,12 +57,6 @@ public class ReservationAppMrp {
     }
 
 
-    //    public CreateReservationCmdRes reservation_to_createReservationCmdRes(ReservationAgg reservation) {
-    //
-    //        return CreateReservationCmdRes.builder().message(List.of("Reservation created successfully")).build();
-    //
-    //    }
-
     public ReservationAgg createReservationCmd_to_reservation(CreateReservationCmd c) {
 
 
@@ -93,9 +88,10 @@ public class ReservationAppMrp {
                                         .build();
     }
 
-    public CreateReservationCmdRes reservation_to_createReservationCmdRes(List<String> messageBox) {
+    public CreateReservationCmdRes reservation_to_createReservationCmdRes(List<String> messageBox,
+                                                                          HashMap<String, String> dataResponse) {
 
-        return CreateReservationCmdRes.builder().message(messageBox).build();
+        return CreateReservationCmdRes.builder().message(messageBox).data(dataResponse).build();
     }
 
     public CustomerResvAgg createCustomerCmd_to_customer(CreateCustomerCmd c) {
@@ -141,8 +137,3 @@ public class ReservationAppMrp {
     }
 
 }
-
-
-
-
-

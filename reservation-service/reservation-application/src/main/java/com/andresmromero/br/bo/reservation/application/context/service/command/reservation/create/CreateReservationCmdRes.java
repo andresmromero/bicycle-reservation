@@ -3,9 +3,10 @@ package com.andresmromero.br.bo.reservation.application.context.service.command.
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Builder
-public record CreateReservationCmdRes(@NotNull List<String> message) {
+public record CreateReservationCmdRes(@NotNull List<String> message, HashMap<String, String> data) {
 
 }

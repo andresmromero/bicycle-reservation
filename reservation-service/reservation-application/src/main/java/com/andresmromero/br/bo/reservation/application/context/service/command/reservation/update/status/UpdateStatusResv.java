@@ -53,7 +53,7 @@ public class UpdateStatusResv {
         }
 
 
-        return UpdateStatusResvCmdRes.builder().build();
+        return UpdateStatusResvCmdRes.builder().message(List.of("payment done")).build();
     }
 
     private ReservationAgg get_reservation(ReservationId reservationId) {

@@ -6,6 +6,10 @@ public class UpdateStatusResvCmdRes {
 
     private List<String> message;
 
+    public UpdateStatusResvCmdRes() {
+
+    }
+
     public UpdateStatusResvCmdRes(List<String> message) {
 
         this.message = message;

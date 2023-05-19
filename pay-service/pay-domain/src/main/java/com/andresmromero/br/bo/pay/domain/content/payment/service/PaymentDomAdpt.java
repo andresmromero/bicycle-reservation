@@ -61,7 +61,7 @@ public class PaymentDomAdpt implements PaymentDomSvc {
 
 
         if (payment.getPrice().isGreaterThan(entry.getTotal())) {
-            messageBox.add("Dinero insuficiente para adquirir la reserva");
+            messageBox.add("Insufficient money to purchase the reserve");
         }
 
     }

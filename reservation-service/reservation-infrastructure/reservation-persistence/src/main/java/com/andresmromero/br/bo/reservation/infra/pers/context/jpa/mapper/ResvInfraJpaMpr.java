@@ -11,10 +11,10 @@ import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.res
 import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.reservation.ReservationItem;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.reservation.VehicleResv;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.entity.station.StationResvAgg;
+import com.andresmromero.br.bo.reservation.domain.context.reservation.service.comm.GetAvailableMainQryComm;
 import com.andresmromero.br.bo.reservation.domain.context.reservation.vo.reservation.TrackingId;
 import com.andresmromero.br.bo.reservation.infra.pers.context.jpa.entity.CustomerResvJpaEnt;
 import com.andresmromero.br.bo.reservation.infra.pers.context.jpa.entity.ReservationJpaEnt;
-import com.andresmromero.br.bo.reservation.infra.pers.context.jpa.entity.StationResvJpaEnt;
 import com.andresmromero.br.bo.reservation.infra.pers.context.jpa.exception.ResvInfraExc;
 
 import java.util.ArrayList;
@@ -105,29 +105,6 @@ public class ResvInfraJpaMpr {
         return station.getVehicles().stream().map(x -> x.getId().getValue()).toList();
     }
 
-    public StationResvAgg stationEntity_to_station(List<StationResvJpaEnt> stationList) {
-
-        StationResvJpaEnt stationEntity =
-                stationList.stream().findFirst().orElseThrow(() -> new ResvInfraExc("Station no found"));
-
-
-        List<VehicleResv> stationVehicleList = stationList.stream()
-                                                          .map(x -> VehicleResv.Builder.builder()
-                                                                                       .vehicleId(new VehicleId(x.getVehicleId()))
-                                                                                       .name(x.getVehicleName())
-                                                                                       .price(new MoneyVo(x.getVehiclePrice()))
-                                                                                       .brand(new BrandId(x.getVehicleBrand()))
-                                                                                       .model(new ModelId(x.getVehicleModel()))
-                                                                                       .build())
-                                                          .toList();
-
-        return StationResvAgg.Builder.builder()
-                                     .stationId(new StationId(stationEntity.getStationId()))
-                                     .vehicles(stationVehicleList)
-                                     .isActive(stationEntity.getStationActive())
-                                     .build();
-
-    }
 
     public CustomerResvJpaEnt customer_to_customerEntity(CustomerResvAgg c) {
 
@@ -152,6 +129,33 @@ public class ResvInfraJpaMpr {
         customerFound.setEmail(c.getEmail().getValue());
         customerFound.setNickname(c.getNickname());
         return customerFound;
+    }
+
+    public StationResvAgg getAvailableMainQryComm_to_station(List<GetAvailableMainQryComm> stationList) {
+
+
+        GetAvailableMainQryComm stationEntity = stationList.stream()
+                                                           .findFirst()
+                                                           .orElseThrow(() -> new ResvInfraExc(
+                                                                   "The information coming from the station service does not correspond"));
+
+
+        List<VehicleResv> stationVehicleList = stationList.stream()
+                                                          .map(x -> VehicleResv.Builder.builder()
+                                                                                       .vehicleId(new VehicleId(x.vehicleId()))
+                                                                                       .name(x.vehicleName())
+                                                                                       .price(new MoneyVo(x.vehiclePrice()))
+                                                                                       .brand(new BrandId(x.vehicleBrand()))
+                                                                                       .model(new ModelId(x.vehicleModel()))
+                                                                                       .build())
+                                                          .toList();
+
+        return StationResvAgg.Builder.builder()
+                                     .stationId(new StationId(stationEntity.stationId()))
+                                     .vehicles(stationVehicleList)
+                                     .isActive(stationEntity.stationActive())
+                                     .build();
+
     }
 
 }
